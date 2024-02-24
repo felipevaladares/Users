@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.felpster.userslist.ui.theme.AppTheme
 
-class HomeFragment : Fragment() {
-    private lateinit var viewModel: HomeViewModel
+class UsersFragment : Fragment() {
+    private lateinit var viewModel: UsersViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(this)[UsersViewModel::class.java]
         // TODO: Use the ViewModel
     }
 }

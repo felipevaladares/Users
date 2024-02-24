@@ -2,6 +2,6 @@ package com.felpster.userslist.ui.home
 
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class UsersViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }
