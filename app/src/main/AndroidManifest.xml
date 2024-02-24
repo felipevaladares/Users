@@ -13,7 +13,7 @@
         android:theme="@style/Theme.UsersList"
         tools:targetApi="31">
         <activity
-            android:name="com.felpster.userslist.MainActivity"
+            android:name="com.felpster.userslist.ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.UsersList">
             <intent-filter>
