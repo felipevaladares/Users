@@ -1,4 +1,4 @@
-package com.felpster.userslits
+package com.felpster.userslist
 
 import org.junit.Test
 

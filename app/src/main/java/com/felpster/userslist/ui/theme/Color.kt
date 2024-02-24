@@ -1,4 +1,4 @@
-package com.felpster.userslits.ui.theme
+package com.felpster.userslist.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
