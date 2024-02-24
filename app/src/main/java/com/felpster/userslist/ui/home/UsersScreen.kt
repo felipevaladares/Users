@@ -25,7 +25,7 @@ import com.felpster.userslits.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(items: List<String> = listOf("testing", "testing", "testing", "testing","testing", "testing", "testing","testing", "testing", "testing",)) {
+fun HomeScreen(items: List<String> = listOf("testing", "testing", "testing", "testing", "testing", "testing", "testing", "testing", "testing", "testing",)) {
     val context = LocalContext.current
     Scaffold(
         topBar = {
@@ -40,7 +40,7 @@ fun HomeScreen(items: List<String> = listOf("testing", "testing", "testing", "te
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            items(items) {item ->
+            items(items) { item ->
                 UserCard(name = item, email = item) {
                     Toast.makeText(context, "Card clicked", Toast.LENGTH_LONG).show()
                 }
