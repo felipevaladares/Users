@@ -15,25 +15,25 @@ import kotlinx.coroutines.launch
 sealed class UsersViewState {
     data class Success(val users: List<User>) : UsersViewState()
 
-    data class Error(val exception: Throwable?) : UsersViewState()
+    data class Error(val message: String?) : UsersViewState()
 
-    data object Loading : UsersViewState()
+    data class Loading(val message: String?) : UsersViewState()
 }
 
 @HiltViewModel
 class UsersViewModel @Inject constructor(
     private val userRepository: UserRepository,
 ) : ViewModel() {
-    private val _state = MutableStateFlow<UsersViewState>(UsersViewState.Loading)
+    private val _state = MutableStateFlow<UsersViewState>(UsersViewState.Loading(null))
     val state: StateFlow<UsersViewState> = _state
 
     init {
         viewModelScope.launch {
             userRepository.getUsers().asResult().collect { result ->
                 when (result) {
-                    is Result.Loading -> _state.value = UsersViewState.Loading
+                    is Result.Loading -> _state.value = UsersViewState.Loading(null)
                     is Result.Success -> _state.value = UsersViewState.Success(result.data)
-                    is Result.Error -> _state.value = UsersViewState.Error(result.exception)
+                    is Result.Error -> _state.value = UsersViewState.Error(result.exception?.message)
                 }
             }
         }
