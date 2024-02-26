@@ -49,7 +49,6 @@ fun UserCardPreview() {
     AppTheme {
         Column(modifier = Modifier.padding(8.dp)) {
             UserCard("Felipe", "felipe.valadares2@gmail.com") {
-
             }
         }
     }

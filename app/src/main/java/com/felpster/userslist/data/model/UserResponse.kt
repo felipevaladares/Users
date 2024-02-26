@@ -1,29 +1,24 @@
 package com.felpster.userslist.data.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class UserResponse(
     @Json(name = "id")
-    val id : Int,
-
+    val id: Int,
     @Json(name = "name")
-    val name : String,
-
+    val name: String,
     @Json(name = "username")
-    val username : String,
-
+    val username: String,
     @Json(name = "email")
-    val email : String,
-
+    val email: String,
     @Json(name = "address")
-    val address : Address,
-
+    val address: Address,
     @Json(name = "phone")
-    val phone : String,
-
+    val phone: String,
     @Json(name = "website")
-    val website : String,
-
+    val website: String,
     @Json(name = "company")
-    val company : Company,
+    val company: Company,
 )

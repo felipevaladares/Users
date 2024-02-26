@@ -13,6 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Users lits"
+rootProject.name = "Users list"
 include(":app")
- 

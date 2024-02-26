@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.felpster.userslist.ui.home.UsersFragment"
+        android:name="com.felpster.userslist.presentation.home.UsersFragment"
         android:label="Home" />
 </navigation>

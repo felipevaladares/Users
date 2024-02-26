@@ -1,4 +1,4 @@
-package com.felpster.userslist.data.api
+package com.felpster.userslist.data.remote
 
 import com.felpster.userslist.data.model.UserResponse
 import retrofit2.http.GET
