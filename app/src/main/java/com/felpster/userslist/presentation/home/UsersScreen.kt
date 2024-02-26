@@ -1,6 +1,5 @@
 package com.felpster.userslist.presentation.home
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -16,13 +15,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.felpster.userslist.R
 import com.felpster.userslist.domain.model.User
 import com.felpster.userslist.ui.components.ErrorLayout
@@ -32,7 +29,10 @@ import com.felpster.userslist.ui.theme.AppTheme
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun UsersScreen(viewState: UsersViewState) {
+fun UsersScreen(
+    viewState: UsersViewState,
+    onEvent: (UsersViewEvent) -> Unit,
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -40,16 +40,31 @@ fun UsersScreen(viewState: UsersViewState) {
                 title = {
                     Text(
                         text = stringResource(R.string.app_name),
-                        style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.SemiBold),
+                        style = TextStyle(fontWeight = FontWeight.SemiBold),
                     )
                 },
             )
         },
     ) { padding ->
         when (viewState) {
-            is UsersViewState.Success -> UsersContent(viewState.users, Modifier.padding(padding))
-            is UsersViewState.Error -> ErrorLayout(viewState.message, Modifier.fillMaxSize().padding(padding))
-            is UsersViewState.Loading -> LoadingLayout(viewState.message, Modifier.fillMaxSize().padding(padding))
+            is UsersViewState.Success ->
+                UsersContent(
+                    users = viewState.users,
+                    onClick = onEvent,
+                    modifier = Modifier.padding(padding),
+                )
+
+            is UsersViewState.Error ->
+                ErrorLayout(
+                    message = viewState.message,
+                    modifier = Modifier.fillMaxSize().padding(padding),
+                )
+
+            is UsersViewState.Loading ->
+                LoadingLayout(
+                    message = viewState.message,
+                    modifier = Modifier.fillMaxSize().padding(padding),
+                )
         }
     }
 }
@@ -58,17 +73,19 @@ fun UsersScreen(viewState: UsersViewState) {
 private fun UsersContent(
     users: List<User>,
     modifier: Modifier = Modifier,
+    onClick: (UsersViewEvent) -> Unit,
 ) {
-    val context = LocalContext.current
     LazyColumn(
         modifier = modifier.fillMaxHeight(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(users) { user ->
-            UserCard(name = user.name, email = user.email) {
-                Toast.makeText(context, "Card clicked", Toast.LENGTH_LONG).show()
-            }
+            UserCard(
+                name = user.name,
+                email = user.email,
+                onClick = { onClick(UsersViewEvent.OnCardClick(user)) }
+            )
         }
     }
 }
@@ -96,7 +113,7 @@ fun UsersScreenPreview() {
                     ),
                 ),
             ),
-        )
+        ) {}
     }
 }
 
@@ -106,7 +123,7 @@ fun UsersScreenLoadingPreview() {
     AppTheme {
         UsersScreen(
             UsersViewState.Loading("Retrieving users list..."),
-        )
+        ) {}
     }
 }
 
@@ -116,6 +133,6 @@ fun UsersScreenErrorPreview() {
     AppTheme {
         UsersScreen(
             UsersViewState.Error(null),
-        )
+        ) {}
     }
 }
