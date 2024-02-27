@@ -27,8 +27,8 @@ class FakeUserRepository: UserRepository {
     /**
      * A test-only API to allow controlling the list of users from tests.
      */
-    suspend fun emitUsers(users: List<User>, simulateError: Boolean = false) {
-        emitError = simulateError
+    suspend fun emitUsers(users: List<User>, forceError: Boolean = false) {
+        emitError = forceError
         usersFlow.emit(users)
     }
 

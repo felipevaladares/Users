@@ -25,7 +25,7 @@ class UsersViewModelTest {
         viewModel.state.test {
             val firstItem = awaitItem()
 
-            //using Google Truth library for assertions, more fluent, much better logs
+            //using Google Truth library for assertions, more fluent, better logs
             assertThat(firstItem).isEqualTo(UsersViewState.Loading(null))
         }
     }
@@ -49,7 +49,7 @@ class UsersViewModelTest {
             val firstItem = awaitItem()
             assertThat(firstItem).isEqualTo(UsersViewState.Loading(null))
 
-            repository.emitUsers(FakeUserRepository.fakeUsersList, true)
+            repository.emitUsers(listOf(), forceError = true)
 
             val secondItem = awaitItem()
             assertThat(secondItem).isEqualTo(UsersViewState.Error(null))
