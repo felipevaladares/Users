@@ -8,19 +8,19 @@ import com.felpster.userslist.domain.model.User
 import com.felpster.userslist.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.stateIn
 
 sealed class UsersViewState {
     data class Success(val users: List<User>) : UsersViewState()
 
     data class Error(val message: String?) : UsersViewState()
 
-    data class Loading(val message: String?) : UsersViewState()
+    data class Loading(val message: String? = null) : UsersViewState()
 }
 
 sealed class UsersViewEvent {
@@ -32,35 +32,43 @@ sealed class NavigationEvent {
 }
 
 @HiltViewModel
-class UsersViewModel
-    @Inject
-    constructor(
-        private val userRepository: UserRepository,
-    ) : ViewModel() {
-        private val _state = MutableStateFlow<UsersViewState>(UsersViewState.Loading(null))
-        val state: StateFlow<UsersViewState> = _state
+class UsersViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+) : ViewModel() {
+    private val navigationEventsChannel = Channel<NavigationEvent>(Channel.UNLIMITED)
+    val navigationEvents = navigationEventsChannel.receiveAsFlow()
 
-        private val navigationEventsChannel = Channel<NavigationEvent>(Channel.UNLIMITED)
-        val navigationEvents = navigationEventsChannel.receiveAsFlow()
-
-        init {
-            viewModelScope.launch(Dispatchers.IO) {
-                userRepository.getUsers().asResult().collect { result ->
-                    when (result) {
-                        is Result.Loading -> _state.value = UsersViewState.Loading(null)
-                        is Result.Success -> _state.value = UsersViewState.Success(result.data)
-                        is Result.Error -> _state.value = UsersViewState.Error(result.exception?.message)
-                    }
+    val state: StateFlow<UsersViewState> by lazy {
+        userRepository
+            .getUsers()
+            .asResult()
+            .map { result ->
+                when (result) {
+                    is Result.Loading -> UsersViewState.Loading(null)
+                    is Result.Success -> UsersViewState.Success(result.data)
+                    is Result.Error -> UsersViewState.Error(result.exception?.message)
                 }
             }
-        }
+            .stateIn(
+                scope = viewModelScope,
+                initialValue = UsersViewState.Loading(null),
+                started = SharingStarted.WhileSubscribed(SUBSCRIPTION_TIMEOUT),
+            )
+    }
 
-        fun onEvent(usersViewEvent: UsersViewEvent) {
-            when (usersViewEvent) {
-                is UsersViewEvent.OnCardClick ->
-                    navigationEventsChannel.trySend(
-                        NavigationEvent.NavigateToUserDetails(usersViewEvent.user),
-                    )
-            }
+
+    fun onEvent(usersViewEvent: UsersViewEvent) {
+        when (usersViewEvent) {
+            is UsersViewEvent.OnCardClick ->
+                navigationEventsChannel.trySend(
+                    NavigationEvent.NavigateToUserDetails(usersViewEvent.user),
+                )
         }
     }
+
+    private companion object {
+        private const val SUBSCRIPTION_TIMEOUT = 5_000L
+    }
+}
+
+

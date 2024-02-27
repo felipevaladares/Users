@@ -12,19 +12,13 @@ android {
     defaultConfig {
         applicationId = "com.felpster.userslist"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
-        }
-
-        testOptions {
-            unitTests {
-                isReturnDefaultValues = true
-            }
         }
     }
 
@@ -51,6 +45,7 @@ android {
     testOptions {
         unitTests {
             isReturnDefaultValues = true
+            isIncludeAndroidResources = true
         }
     }
     packaging {
@@ -88,6 +83,8 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.9")
     testImplementation("com.google.truth:truth:1.4.1")
     testImplementation("app.cash.turbine:turbine:1.0.0")
+    testImplementation("org.robolectric:robolectric:4.9")
+    testImplementation("androidx.compose.ui:ui-test-junit4")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
 
 

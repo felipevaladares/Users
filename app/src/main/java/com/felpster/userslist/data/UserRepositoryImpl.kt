@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 class UserRepositoryImpl @Inject constructor(
     private val userApi: UserApi,
 ) : UserRepository {
-    override suspend fun getUsers() =
+    override fun getUsers() =
         flow {
             emit(
                 userApi.getUsers().map {

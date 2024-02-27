@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.felpster.coreui.R
+import com.felpster.coreui.components.ErrorLayoutTags.ERROR_LAYOUT
 
 @Composable
 fun ErrorLayout(
@@ -22,7 +24,7 @@ fun ErrorLayout(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.testTag(ERROR_LAYOUT),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -37,4 +39,8 @@ fun ErrorLayout(
             text = message ?: stringResource(id = R.string.generic_error_message),
         )
     }
+}
+
+object ErrorLayoutTags {
+    const val ERROR_LAYOUT = "ErrorLayoutTags_content"
 }

@@ -1,4 +1,4 @@
-package com.felpster.userslist
+package com.felpster.userslist.commons
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

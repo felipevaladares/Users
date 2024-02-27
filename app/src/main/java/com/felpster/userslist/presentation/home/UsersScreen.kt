@@ -15,6 +15,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,7 @@ import com.felpster.coreui.components.UserCard
 import com.felpster.coreui.theme.AppTheme
 import com.felpster.userslist.R
 import com.felpster.userslist.domain.model.User
+import com.felpster.userslist.presentation.home.UsersContentLayoutTags.USERS_LAYOUT
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,6 +60,8 @@ fun UsersScreen(
                     message = viewState.message,
                     modifier = Modifier.fillMaxSize().padding(padding),
                 )
+
+            else -> {}
         }
     }
 }
@@ -69,7 +73,7 @@ private fun UsersContent(
     onClick: (UsersViewEvent) -> Unit,
 ) {
     LazyColumn(
-        modifier = modifier.fillMaxHeight(),
+        modifier = modifier.fillMaxHeight().testTag(USERS_LAYOUT),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
@@ -81,6 +85,10 @@ private fun UsersContent(
             )
         }
     }
+}
+
+object UsersContentLayoutTags {
+    const val USERS_LAYOUT = "UsersContentLayoutTags_content"
 }
 
 @Preview(showBackground = true)
