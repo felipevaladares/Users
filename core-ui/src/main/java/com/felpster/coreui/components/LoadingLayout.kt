@@ -1,4 +1,4 @@
-package com.felpster.userslist.ui.components
+package com.felpster.coreui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-internal fun LoadingLayout(
+fun LoadingLayout(
     message: String?,
     modifier: Modifier = Modifier,
 ) {

@@ -2,8 +2,8 @@ package com.felpster.userslist.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.felpster.userslist.commons.Result
-import com.felpster.userslist.commons.asResult
+import com.felpster.userslist.commons.extensions.Result
+import com.felpster.userslist.commons.extensions.asResult
 import com.felpster.userslist.domain.model.User
 import com.felpster.userslist.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

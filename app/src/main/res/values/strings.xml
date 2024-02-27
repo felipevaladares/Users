@@ -1,4 +1,3 @@
 <resources>
     <string name="app_name">Users list</string>
-    <string name="generic_error_message">Ops, something went wrong</string>
 </resources>

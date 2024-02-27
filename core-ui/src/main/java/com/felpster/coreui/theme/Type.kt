@@ -1,4 +1,4 @@
-package com.felpster.userslist.ui.theme
+package com.felpster.coreui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

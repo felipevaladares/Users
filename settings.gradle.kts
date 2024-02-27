@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Users list"
 include(":app")
+include(":core-ui")

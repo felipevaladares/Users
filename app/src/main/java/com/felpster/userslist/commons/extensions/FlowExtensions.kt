@@ -1,4 +1,4 @@
-package com.felpster.userslist.commons
+package com.felpster.userslist.commons.extensions
 
 import java.io.IOException
 import kotlinx.coroutines.delay

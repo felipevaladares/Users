@@ -18,12 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.felpster.coreui.components.ErrorLayout
+import com.felpster.coreui.components.LoadingLayout
+import com.felpster.coreui.components.UserCard
+import com.felpster.coreui.theme.AppTheme
 import com.felpster.userslist.R
 import com.felpster.userslist.domain.model.User
-import com.felpster.userslist.ui.components.ErrorLayout
-import com.felpster.userslist.ui.components.LoadingLayout
-import com.felpster.userslist.ui.components.UserCard
-import com.felpster.userslist.ui.theme.AppTheme
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

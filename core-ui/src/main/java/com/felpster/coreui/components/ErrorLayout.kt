@@ -1,4 +1,4 @@
-package com.felpster.userslist.ui.components
+package com.felpster.coreui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -14,10 +14,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.felpster.userslist.R
+import com.felpster.coreui.R
 
 @Composable
-internal fun ErrorLayout(
+fun ErrorLayout(
     message: String?,
     modifier: Modifier = Modifier,
 ) {
