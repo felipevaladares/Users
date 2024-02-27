@@ -35,6 +35,6 @@ class FakeUserRepository: UserRepository {
     companion object {
         val fakeUser = User(1, "name", "username", "email", "site")
         val fakeUser2 = User(2, "name 2", "username 2", "email 2", "site 2")
-        val fakeUsersList = listOf(fakeUser, fakeUser2)
+        val users = listOf(fakeUser, fakeUser2)
     }
 }

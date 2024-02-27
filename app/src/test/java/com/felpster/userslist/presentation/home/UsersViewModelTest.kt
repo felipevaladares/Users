@@ -36,10 +36,10 @@ class UsersViewModelTest {
             val firstItem = awaitItem()
             assertThat(firstItem).isEqualTo(UsersViewState.Loading(null))
 
-            repository.emitUsers(FakeUserRepository.fakeUsersList)
+            repository.emitUsers(FakeUserRepository.users)
 
             val secondItem = awaitItem()
-            assertThat(secondItem).isEqualTo(UsersViewState.Success(FakeUserRepository.fakeUsersList))
+            assertThat(secondItem).isEqualTo(UsersViewState.Success(FakeUserRepository.users))
         }
     }
 

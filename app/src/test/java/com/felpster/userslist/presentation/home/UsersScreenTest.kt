@@ -18,7 +18,7 @@ class UsersScreenTest : ComposeTest() {
 
     @Test
     fun `Ensure users layout is displayed and items exists`() {
-        val userList = FakeUserRepository.fakeUsersList
+        val userList = FakeUserRepository.users
         with(composeTestRule) {
             setContent {
                 AppTheme {
