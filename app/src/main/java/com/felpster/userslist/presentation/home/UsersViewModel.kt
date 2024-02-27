@@ -8,6 +8,7 @@ import com.felpster.userslist.domain.model.User
 import com.felpster.userslist.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -43,7 +44,7 @@ class UsersViewModel
         val navigationEvents = navigationEventsChannel.receiveAsFlow()
 
         init {
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO) {
                 userRepository.getUsers().asResult().collect { result ->
                     when (result) {
                         is Result.Loading -> _state.value = UsersViewState.Loading(null)

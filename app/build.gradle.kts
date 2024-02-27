@@ -20,6 +20,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        testOptions {
+            unitTests {
+                isReturnDefaultValues = true
+            }
+        }
     }
 
     buildTypes {
@@ -41,6 +47,11 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
+    }
+    testOptions {
+        unitTests {
+            isReturnDefaultValues = true
+        }
     }
     packaging {
         resources {
@@ -74,6 +85,11 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     testImplementation("junit:junit:4.13.2")
+    testImplementation("io.mockk:mockk:1.13.9")
+    testImplementation("com.google.truth:truth:1.4.1")
+    testImplementation("app.cash.turbine:turbine:1.0.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
