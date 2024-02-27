@@ -10,8 +10,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.felpster.coreui.components.UserCardLayoutTags.CARD_LAYOUT
 import com.felpster.coreui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,6 +27,7 @@ fun UserCard(
     ElevatedCard(
         modifier =
             modifier
+                .testTag(CARD_LAYOUT)
                 .fillMaxWidth()
                 .wrapContentHeight(),
         onClick = onClick,
@@ -52,4 +55,8 @@ fun UserCardPreview() {
             }
         }
     }
+}
+
+object UserCardLayoutTags {
+    const val CARD_LAYOUT = "UserCardLayoutTags_content"
 }

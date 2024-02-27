@@ -1,6 +1,8 @@
 package com.felpster.userslist.presentation.home
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import com.felpster.coreui.components.ErrorLayoutTags
 import com.felpster.coreui.components.LoadingLayoutTags
@@ -15,23 +17,27 @@ import org.robolectric.RobolectricTestRunner
 class UsersScreenTest : ComposeTest() {
 
     @Test
-    fun `Ensure users content is displayed`() {
+    fun `Ensure users layout is displayed and items exists`() {
+        val userList = FakeUserRepository.fakeUsersList
         with(composeTestRule) {
             setContent {
                 AppTheme {
                     UsersScreen(
-                        viewState = UsersViewState.Success(FakeUserRepository.fakeUsersList),
+                        viewState = UsersViewState.Success(userList),
                         onEvent = {},
                     )
                 }
             }
 
+            waitForIdle()
+
             onNodeWithTag(UsersContentLayoutTags.USERS_LAYOUT).assertIsDisplayed()
+            onNodeWithTag(UsersContentLayoutTags.USERS_LAYOUT).onChildren().assertCountEquals(userList.size)
         }
     }
 
     @Test
-    fun `Ensure error screen is displayed`() {
+    fun `Ensure error layout is displayed`() {
         with(composeTestRule) {
             setContent {
                 AppTheme {
@@ -44,7 +50,7 @@ class UsersScreenTest : ComposeTest() {
     }
 
     @Test
-    fun `Ensure loading screen is displayed`() {
+    fun `Ensure loading layout is displayed`() {
         with(composeTestRule) {
             setContent {
                 AppTheme {
