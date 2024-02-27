@@ -50,8 +50,7 @@ class UsersFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.navigationEvents.collectLatest { navigationEvent ->
                     when (navigationEvent) {
-                        is NavigationEvent.NavigateToUserDetails ->
-                            navigateToUserDetails(navigationEvent)
+                        is NavigationEvent.NavigateToUserDetails -> navigateToUserDetails(navigationEvent)
                     }
                 }
             }
