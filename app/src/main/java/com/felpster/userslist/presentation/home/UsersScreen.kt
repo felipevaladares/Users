@@ -60,8 +60,6 @@ fun UsersScreen(
                     message = viewState.message,
                     modifier = Modifier.fillMaxSize().padding(padding),
                 )
-
-            else -> {}
         }
     }
 }
