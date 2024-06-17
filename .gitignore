@@ -24,3 +24,7 @@ local.properties
 /.idea/migrations.xml
 /.idea/misc.xml
 /.idea/vcs.xml
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/codeStyles/Project.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/other.xml

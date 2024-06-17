@@ -4,6 +4,7 @@ import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.felpster.coreui.components.ErrorLayoutTags
 import com.felpster.coreui.components.LoadingLayoutTags
 import com.felpster.coreui.theme.AppTheme
@@ -11,14 +12,13 @@ import com.felpster.userslist.commons.ComposeTest
 import com.felpster.userslist.commons.FakeUserRepository
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 class UsersScreenTest : ComposeTest() {
 
     @Test
     fun `Ensure users layout is displayed and items exists`() {
-        val userList = FakeUserRepository.users
+        val userList = FakeUserRepository.usersList
         with(composeTestRule) {
             setContent {
                 AppTheme {
@@ -28,8 +28,6 @@ class UsersScreenTest : ComposeTest() {
                     )
                 }
             }
-
-            waitForIdle()
 
             onNodeWithTag(UsersContentLayoutTags.USERS_LAYOUT).assertIsDisplayed()
             onNodeWithTag(UsersContentLayoutTags.USERS_LAYOUT).onChildren().assertCountEquals(userList.size)

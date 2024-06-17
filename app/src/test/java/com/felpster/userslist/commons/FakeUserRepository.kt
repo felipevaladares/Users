@@ -2,11 +2,11 @@ package com.felpster.userslist.commons
 
 import com.felpster.userslist.domain.model.User
 import com.felpster.userslist.domain.repository.UserRepository
-import java.io.IOException
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.onEach
+import java.io.IOException
 
 class FakeUserRepository: UserRepository {
     /**
@@ -33,8 +33,21 @@ class FakeUserRepository: UserRepository {
     }
 
     companion object {
-        val fakeUser = User(1, "name", "username", "email", "site")
-        val fakeUser2 = User(2, "name 2", "username 2", "email 2", "site 2")
-        val users = listOf(fakeUser, fakeUser2)
+        val usersList = listOf(
+            User(
+                id = 0,
+                name = "Felipe",
+                username = "username",
+                email = "felipe.valadares2@gmail.com",
+                website = "http://www.google.com",
+            ),
+            User(
+                id = 0,
+                name = "John",
+                username = "username",
+                email = "john@gmail.com",
+                website = "http://www.google.com",
+            ),
+        )
     }
 }
